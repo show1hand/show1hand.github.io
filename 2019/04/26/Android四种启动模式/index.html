@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Hexo</title>
+  <title>Android四种启动模式 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="Activity四种启动模式standard模式这个是系统默认启动模式，通过这个模式启动的activity，会进入启动它的那个activity所属的任务栈中，也就是说如果我通过A来启动了B,那么当前的activity栈中的情况便是A在栈顶，B在它的下面。我们绝大部分的情况都可以走这种默认模式，但有一点必须注意：standard只能通过activity来启动，因为如果是通过例如application">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android四种启动模式">
+<meta property="og:url" content="http://yoursite.com/2019/04/26/Android四种启动模式/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Activity四种启动模式standard模式这个是系统默认启动模式，通过这个模式启动的activity，会进入启动它的那个activity所属的任务栈中，也就是说如果我通过A来启动了B,那么当前的activity栈中的情况便是A在栈顶，B在它的下面。我们绝大部分的情况都可以走这种默认模式，但有一点必须注意：standard只能通过activity来启动，因为如果是通过例如application">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-26T06:14:35.182Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Android四种启动模式">
+<meta name="twitter:description" content="Activity四种启动模式standard模式这个是系统默认启动模式，通过这个模式启动的activity，会进入启动它的那个activity所属的任务栈中，也就是说如果我通过A来启动了B,那么当前的activity栈中的情况便是A在栈顶，B在它的下面。我们绝大部分的情况都可以走这种默认模式，但有一点必须注意：standard只能通过activity来启动，因为如果是通过例如application">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,103 +154,159 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Android四种启动模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Android四种启动模式
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/26/Android四种启动模式/" class="archive-article-date">
+
+        
+        <a href="/2019/04/26/Android四种启动模式/" class="archive-article-date">
   	<time datetime="2019-04-26T06:12:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/26/Android四种启动模式/">Android四种启动模式</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Activity四种启动模式"><a href="#Activity四种启动模式" class="headerlink" title="Activity四种启动模式"></a>Activity四种启动模式</h1><h2 id="standard模式"><a href="#standard模式" class="headerlink" title="standard模式"></a>standard模式</h2><p>这个是系统默认启动模式，通过这个模式启动的activity，会进入启动它的那个activity所属的任务栈中，也就是说如果我通过A来启动了B,那么当前的activity栈中的情况便是A在栈顶，B在它的下面。我们绝大部分的情况都可以走这种默认模式，但有一点必须注意：<strong>standard</strong>只能通过activity来启动，因为如果是通过例如applicationContext来启动，那么久不存在一个任务栈来供新的activity进入。</p>
+<h2 id="singleTop模式"><a href="#singleTop模式" class="headerlink" title="singleTop模式"></a>singleTop模式</h2><p>配置方式<br><code>&lt;activity android:name=&quot;.singletop.SingleTopActivity&quot; android:launchMode=&quot;singleTop&quot;&gt;</code><br>栈顶复用模式，当要启动的activity位于当前任务栈的栈顶时，该activity将不会重新被创建，也就不会走OnCreate和OnStart方法，但他的onNewIntent会被调用，一些情况可以在这里进行处理。<br>其实栈顶复用模式是比较简单的，只是考虑了一个在栈顶时的情况。如果要启动的activity不在栈顶，那么它与standard模式是完全一样的</p>
+<h2 id="singleTask模式"><a href="#singleTask模式" class="headerlink" title="singleTask模式"></a>singleTask模式</h2><p>栈内复用模式，也是最复杂的一个模式。顾名思义，当要启动的activity存在于任务栈中的话，就不会重新创建，和singletop一样，不会再走onCreate和onStart方法，只会调用onNewIntent。但是值得注意的一点是，当一个activity以该模式重新启动的话，那么位于它上层的activity实例将会被清出任务栈，它就是这样走到栈顶的。<br>再详细一些的话就是通过singleTask模式启动，其实系统是会进行两次搜索的。第一次会搜索时候存在有要启动的activity想要的的任务栈，什么是想要的任务栈呢，通常activity的任务栈是默认的以包名为任务栈名，此外我们还可以根据<code>taskAffinity</code>属性来指定对应的任务栈，例如：<br><code>&lt;activity android:name=&quot;.ActivityStandard&quot; android:launchMode=&quot;singleTask&quot; android:taskAffinity=&quot;com.castiel.demo.standard&quot;/&gt;</code><br>注意<code>taskAffinity</code>属性在standard模式和singleTop模式中是不生效的。<br>回到前面，如果不存在想要的任务栈，系统就会创建一个指定的任务栈并把activity压入。如果存在，就会执行第二次搜索，这是会搜索任务栈中是否存在想要启动的activity实例。这是就会执行开始的那个流程。</p>
+<h2 id="singleInstance模式"><a href="#singleInstance模式" class="headerlink" title="singleInstance模式"></a>singleInstance模式</h2><p>全局唯一模式，它会占有一个单独任务栈，除此之外和singleTask模式一致。举一个例子<br>现有一个singleInstance模式的activity,我们将它称之为A，同时又两个不同的应用B和C。我们先通过应用B来启动一次A，这时的A会经历一个从无到有的创建，如果此时在通过应用C来启动A,会发现任务栈中的A还是原来的那个，并且不会走onCreate方法和onStart方法，而是会走onNextIntent。这就是所谓的全局唯一，其实这个模式日常中很少会用的，听说做提醒功能的话有可能用到，日后再调研一下。<br>前面提到singleInstance模式会占有单独的一个任务栈，所以它是不能和onActivityResult同用的。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/26/Android四种启动模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/23/你好，hexo/" class="archive-article-date">
-  	<time datetime="2019-04-23T11:07:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/23/你好，hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你好，hexo</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/23/你好，hexo/">你好，hexo</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/23/hello-world/" class="archive-article-date">
-  	<time datetime="2019-04-23T10:18:12.392Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/23/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -269,8 +329,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
